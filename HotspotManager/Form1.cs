@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Net.NetworkInformation;
 using Windows.Networking.Connectivity;
 using Windows.Networking.NetworkOperators;
 
@@ -92,6 +94,34 @@ namespace HotspotManager
         {
             timer1_Tick(sender, e);
             timer1.Enabled = checkBox1.Checked;
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            var pingSender = new Ping();
+            PingReply reply1 = pingSender.Send("202.97.224.68", 1000);
+            if (!(reply1 != null && reply1.Status == IPStatus.Success))
+            {
+                PingReply reply2 = pingSender.Send("202.38.193.65", 1000);
+                if (reply2 != null && reply2.Status == IPStatus.Success)
+                {
+                    var ps = new List<Process>();
+                    ps.AddRange(Process.GetProcessesByName("DrMain"));
+                    ps.AddRange(Process.GetProcessesByName("DrClient"));
+                    ps.AddRange(Process.GetProcessesByName("DrUpdate"));
+                    foreach (var p in ps)
+                        p.Kill();
+                    foreach (var p in ps)
+                        p.WaitForExit(1000);
+                    Process.Start("C:\\Drcom\\DrUpdateClient\\DrMain.exe");
+                }
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            timer2_Tick(sender, e);
+            timer2.Enabled = checkBox2.Checked;
         }
     }
 }
