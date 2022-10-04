@@ -92,7 +92,10 @@ namespace HotspotManager
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            timer1_Tick(sender, e);
+            if (checkBox1.Checked)
+            {
+                timer1_Tick(sender, e);
+            }
             timer1.Enabled = checkBox1.Checked;
         }
 
@@ -120,7 +123,10 @@ namespace HotspotManager
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            timer2_Tick(sender, e);
+            if (checkBox2.Checked)
+            {
+                timer2_Tick(sender, e);
+            }
             timer2.Enabled = checkBox2.Checked;
         }
     }
