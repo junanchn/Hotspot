@@ -83,9 +83,9 @@
             // 
             this.hotspotCheckBoxAutoReconnect.Location = new System.Drawing.Point(16, 96);
             this.hotspotCheckBoxAutoReconnect.Name = "hotspotCheckBoxAutoReconnect";
-            this.hotspotCheckBoxAutoReconnect.Size = new System.Drawing.Size(120, 24);
+            this.hotspotCheckBoxAutoReconnect.Size = new System.Drawing.Size(240, 24);
             this.hotspotCheckBoxAutoReconnect.TabIndex = 11;
-            this.hotspotCheckBoxAutoReconnect.Text = "保持热点开启";
+            this.hotspotCheckBoxAutoReconnect.Text = "关闭后自动重开";
             this.hotspotCheckBoxAutoReconnect.UseVisualStyleBackColor = true;
             this.hotspotCheckBoxAutoReconnect.CheckedChanged += new System.EventHandler(this.hotspotCheckBoxAutoReconnect_CheckedChanged);
             // 
@@ -101,9 +101,9 @@
             // 
             this.networkCheckBoxAutoReconnect.Location = new System.Drawing.Point(16, 16);
             this.networkCheckBoxAutoReconnect.Name = "networkCheckBoxAutoReconnect";
-            this.networkCheckBoxAutoReconnect.Size = new System.Drawing.Size(120, 24);
+            this.networkCheckBoxAutoReconnect.Size = new System.Drawing.Size(240, 24);
             this.networkCheckBoxAutoReconnect.TabIndex = 20;
-            this.networkCheckBoxAutoReconnect.Text = "自动重新拨号";
+            this.networkCheckBoxAutoReconnect.Text = "掉线后自动重拨";
             this.networkCheckBoxAutoReconnect.UseVisualStyleBackColor = true;
             this.networkCheckBoxAutoReconnect.CheckedChanged += new System.EventHandler(this.networkCheckBoxAutoReconnect_CheckedChanged);
             // 
