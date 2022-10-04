@@ -37,6 +37,7 @@
             this.hotspotCheckBoxAutoReconnect = new System.Windows.Forms.CheckBox();
             this.networkTabPage = new System.Windows.Forms.TabPage();
             this.networkCheckBoxAutoReconnect = new System.Windows.Forms.CheckBox();
+            this.networkCheckBoxUndergraduate = new System.Windows.Forms.CheckBox();
             this.hotspotTabPage.SuspendLayout();
             this.networkTabPage.SuspendLayout();
             this.SuspendLayout();
@@ -92,6 +93,7 @@
             // networkTabPage
             // 
             this.networkTabPage.Controls.Add(this.networkCheckBoxAutoReconnect);
+            this.networkTabPage.Controls.Add(this.networkCheckBoxUndergraduate);
             this.networkTabPage.Name = "hotspotTabPage";
             this.networkTabPage.TabIndex = 2;
             this.networkTabPage.Text = "校园网";
@@ -106,6 +108,15 @@
             this.networkCheckBoxAutoReconnect.Text = "掉线后自动重拨";
             this.networkCheckBoxAutoReconnect.UseVisualStyleBackColor = true;
             this.networkCheckBoxAutoReconnect.CheckedChanged += new System.EventHandler(this.networkCheckBoxAutoReconnect_CheckedChanged);
+            // 
+            // networkCheckBoxUndergraduate
+            // 
+            this.networkCheckBoxUndergraduate.Location = new System.Drawing.Point(16, 48);
+            this.networkCheckBoxUndergraduate.Name = "networkCheckBoxUndergraduate";
+            this.networkCheckBoxUndergraduate.Size = new System.Drawing.Size(240, 24);
+            this.networkCheckBoxUndergraduate.TabIndex = 21;
+            this.networkCheckBoxUndergraduate.Text = "周一至周五 0:00 至 6:00 不重拨";
+            this.networkCheckBoxUndergraduate.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -133,5 +144,6 @@
         private CheckBox hotspotCheckBoxAutoReconnect;
         private TabPage networkTabPage;
         private CheckBox networkCheckBoxAutoReconnect;
+        private CheckBox networkCheckBoxUndergraduate;
     }
 }

@@ -101,6 +101,20 @@ namespace HotspotManager
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            if (networkCheckBoxUndergraduate.Checked)
+            {
+                switch (DateTime.Now.DayOfWeek)
+                {
+                    case DayOfWeek.Monday:
+                    case DayOfWeek.Tuesday:
+                    case DayOfWeek.Wednesday:
+                    case DayOfWeek.Thursday:
+                    case DayOfWeek.Friday:
+                        if(DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 6)
+                            return;
+                        break;
+                }
+            }
             var pingSender = new Ping();
             PingReply reply1 = pingSender.Send("202.97.224.68", 1000);
             if (!(reply1 != null && reply1.Status == IPStatus.Success))
