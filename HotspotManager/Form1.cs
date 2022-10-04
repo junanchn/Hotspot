@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using Windows.Networking.Connectivity;
@@ -146,11 +147,56 @@ namespace HotspotManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                hotspotCheckBoxAutoReconnect.Checked = appSettings["hotspotCheckBoxAutoReconnect"] == "True";
+                networkCheckBoxAutoReconnect.Checked = appSettings["networkCheckBoxAutoReconnect"] == "True";
+                networkCheckBoxUndergraduate.Checked = appSettings["networkCheckBoxUndergraduate"] == "True";
+                generalCheckBoxMinimizeToTray.Checked = appSettings["generalCheckBoxMinimizeToTray"] == "True";
+                generalCheckBoxTrayWhenStarted.Checked = appSettings["generalCheckBoxTrayWhenStarted"] == "True";
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Debug.WriteLine("Error reading app settings");
+            }
             if (generalCheckBoxTrayWhenStarted.Checked)
             {
                 Visible = false;
                 ShowInTaskbar = false;
                 notifyIcon.Visible = true;
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Dictionary<string, string> settings = new Dictionary<string, string>();
+                settings.Add("hotspotCheckBoxAutoReconnect", hotspotCheckBoxAutoReconnect.Checked.ToString());
+                settings.Add("networkCheckBoxAutoReconnect", networkCheckBoxAutoReconnect.Checked.ToString());
+                settings.Add("networkCheckBoxUndergraduate", networkCheckBoxUndergraduate.Checked.ToString());
+                settings.Add("generalCheckBoxMinimizeToTray", generalCheckBoxMinimizeToTray.Checked.ToString());
+                settings.Add("generalCheckBoxTrayWhenStarted", generalCheckBoxTrayWhenStarted.Checked.ToString());
+
+                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                foreach (var pair in settings)
+                {
+                    if (config.AppSettings.Settings[pair.Key] == null)
+                    {
+                        config.AppSettings.Settings.Add(pair.Key, pair.Value);
+                    }
+                    else
+                    {
+                        config.AppSettings.Settings[pair.Key].Value = pair.Value;
+                    }
+                }
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Debug.WriteLine("Error writing app settings");
             }
         }
 
