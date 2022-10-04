@@ -143,5 +143,36 @@ namespace HotspotManager
             }
             timer2.Enabled = networkCheckBoxAutoReconnect.Checked;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (generalCheckBoxTrayWhenStarted.Checked)
+            {
+                Visible = false;
+                ShowInTaskbar = false;
+                notifyIcon.Visible = true;
+            }
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                if (generalCheckBoxMinimizeToTray.Checked)
+                {
+                    Visible = false;
+                    ShowInTaskbar = false;
+                    notifyIcon.Visible = true;
+                }
+            }
+        }
+
+        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            notifyIcon.Visible = false;
+            Visible = true;
+            ShowInTaskbar = true;
+            WindowState = FormWindowState.Normal;
+        }
     }
 }

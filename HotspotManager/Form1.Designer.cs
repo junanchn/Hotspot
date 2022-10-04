@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.hotspotTabPage = new System.Windows.Forms.TabPage();
             this.hotspotButtonConnect = new System.Windows.Forms.Button();
@@ -38,8 +40,13 @@
             this.networkTabPage = new System.Windows.Forms.TabPage();
             this.networkCheckBoxAutoReconnect = new System.Windows.Forms.CheckBox();
             this.networkCheckBoxUndergraduate = new System.Windows.Forms.CheckBox();
+            this.generalTabPage = new System.Windows.Forms.TabPage();
+            this.generalCheckBoxMinimizeToTray = new System.Windows.Forms.CheckBox();
+            this.generalCheckBoxTrayWhenStarted = new System.Windows.Forms.CheckBox();
+            this.tabControl.SuspendLayout();
             this.hotspotTabPage.SuspendLayout();
             this.networkTabPage.SuspendLayout();
+            this.generalTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -52,10 +59,17 @@
             this.timer2.Interval = 12000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "Hotspot";
+            this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
+            // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.hotspotTabPage);
             this.tabControl.Controls.Add(this.networkTabPage);
+            this.tabControl.Controls.Add(this.generalTabPage);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -118,6 +132,33 @@
             this.networkCheckBoxUndergraduate.Text = "周一至周五 0:00 至 6:00 不重拨";
             this.networkCheckBoxUndergraduate.UseVisualStyleBackColor = true;
             // 
+            // generalTabPage
+            // 
+            this.generalTabPage.Controls.Add(this.generalCheckBoxMinimizeToTray);
+            this.generalTabPage.Controls.Add(this.generalCheckBoxTrayWhenStarted);
+            this.generalTabPage.Name = "generalTabPage";
+            this.generalTabPage.TabIndex = 3;
+            this.generalTabPage.Text = "常规";
+            this.generalTabPage.UseVisualStyleBackColor = true;
+            // 
+            // generalCheckBoxMinimizeToTray
+            // 
+            this.generalCheckBoxMinimizeToTray.Location = new System.Drawing.Point(16, 16);
+            this.generalCheckBoxMinimizeToTray.Name = "generalCheckBoxMinimizeToTray";
+            this.generalCheckBoxMinimizeToTray.Size = new System.Drawing.Size(240, 24);
+            this.generalCheckBoxMinimizeToTray.TabIndex = 30;
+            this.generalCheckBoxMinimizeToTray.Text = "最小化到托盘，而不是任务栏";
+            this.generalCheckBoxMinimizeToTray.UseVisualStyleBackColor = true;
+            // 
+            // generalCheckBoxTrayWhenStarted
+            // 
+            this.generalCheckBoxTrayWhenStarted.Location = new System.Drawing.Point(16, 48);
+            this.generalCheckBoxTrayWhenStarted.Name = "generalCheckBoxTrayWhenStarted";
+            this.generalCheckBoxTrayWhenStarted.Size = new System.Drawing.Size(240, 24);
+            this.generalCheckBoxTrayWhenStarted.TabIndex = 31;
+            this.generalCheckBoxTrayWhenStarted.Text = "启动时最小化到托盘";
+            this.generalCheckBoxTrayWhenStarted.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -127,9 +168,12 @@
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.Text = "HotspotManager";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.tabControl.ResumeLayout(false);
             this.hotspotTabPage.ResumeLayout(false);
-            this.hotspotTabPage.PerformLayout();
+            this.networkTabPage.ResumeLayout(false);
+            this.generalTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -138,6 +182,7 @@
 
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
+        private NotifyIcon notifyIcon;
         private TabControl tabControl;
         private TabPage hotspotTabPage;
         private Button hotspotButtonConnect;
@@ -145,5 +190,8 @@
         private TabPage networkTabPage;
         private CheckBox networkCheckBoxAutoReconnect;
         private CheckBox networkCheckBoxUndergraduate;
+        private TabPage generalTabPage;
+        private CheckBox generalCheckBoxMinimizeToTray;
+        private CheckBox generalCheckBoxTrayWhenStarted;
     }
 }
