@@ -73,7 +73,7 @@
             // hotspotButtonConnect
             // 
             this.hotspotButtonConnect.Location = new System.Drawing.Point(16, 16);
-            this.hotspotButtonConnect.Name = "hotspotButtonConnect0";
+            this.hotspotButtonConnect.Name = "hotspotButtonConnect";
             this.hotspotButtonConnect.Size = new System.Drawing.Size(96, 64);
             this.hotspotButtonConnect.TabIndex = 10;
             this.hotspotButtonConnect.Text = "开启热点";
@@ -94,7 +94,7 @@
             // 
             this.networkTabPage.Controls.Add(this.networkCheckBoxAutoReconnect);
             this.networkTabPage.Controls.Add(this.networkCheckBoxUndergraduate);
-            this.networkTabPage.Name = "hotspotTabPage";
+            this.networkTabPage.Name = "networkTabPage";
             this.networkTabPage.TabIndex = 2;
             this.networkTabPage.Text = "校园网";
             this.networkTabPage.UseVisualStyleBackColor = true;
