@@ -81,5 +81,17 @@ namespace HotspotManager
                 }
             }
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            button1.Text = "¿ªÆôÈÈµã";
+            button1_Click(sender, e);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            timer1_Tick(sender, e);
+            timer1.Enabled = checkBox1.Checked;
+        }
     }
 }
