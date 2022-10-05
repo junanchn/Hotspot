@@ -100,8 +100,14 @@ namespace HotspotManager
             timer1.Enabled = hotspotCheckBoxAutoReconnect.Checked;
         }
 
+        private int timer2_wait = 0;
         private void timer2_Tick(object sender, EventArgs e)
         {
+            if(timer2_wait > 0)
+            {
+                timer2_wait -= timer2.Interval;
+                return;
+            }
             if (networkCheckBoxUndergraduate.Checked)
             {
                 switch (DateTime.Now.DayOfWeek)
@@ -132,6 +138,7 @@ namespace HotspotManager
                     foreach (var p in ps)
                         p.WaitForExit(1000);
                     Process.Start("C:\\Drcom\\DrUpdateClient\\DrMain.exe");
+                    timer2_wait = 24000;
                 }
             }
         }
