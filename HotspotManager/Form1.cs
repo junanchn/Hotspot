@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net.NetworkInformation;
 using Windows.Networking.Connectivity;
 using Windows.Networking.NetworkOperators;
+using Microsoft.Win32.TaskScheduler;
 
 namespace HotspotManager
 {
@@ -160,6 +161,7 @@ namespace HotspotManager
                 hotspotCheckBoxAutoReconnect.Checked = appSettings["hotspotCheckBoxAutoReconnect"] == "True";
                 networkCheckBoxAutoReconnect.Checked = appSettings["networkCheckBoxAutoReconnect"] == "True";
                 networkCheckBoxUndergraduate.Checked = appSettings["networkCheckBoxUndergraduate"] == "True";
+                generalCheckBoxAutoStartUp.Checked = appSettings["generalCheckBoxAutoStartUp"] == "True";
                 generalCheckBoxMinimizeToTray.Checked = appSettings["generalCheckBoxMinimizeToTray"] == "True";
                 generalCheckBoxTrayWhenStarted.Checked = appSettings["generalCheckBoxTrayWhenStarted"] == "True";
             }
@@ -183,6 +185,7 @@ namespace HotspotManager
                 settings.Add("hotspotCheckBoxAutoReconnect", hotspotCheckBoxAutoReconnect.Checked.ToString());
                 settings.Add("networkCheckBoxAutoReconnect", networkCheckBoxAutoReconnect.Checked.ToString());
                 settings.Add("networkCheckBoxUndergraduate", networkCheckBoxUndergraduate.Checked.ToString());
+                settings.Add("generalCheckBoxAutoStartUp", generalCheckBoxAutoStartUp.Checked.ToString());
                 settings.Add("generalCheckBoxMinimizeToTray", generalCheckBoxMinimizeToTray.Checked.ToString());
                 settings.Add("generalCheckBoxTrayWhenStarted", generalCheckBoxTrayWhenStarted.Checked.ToString());
 
@@ -226,6 +229,25 @@ namespace HotspotManager
             Visible = true;
             ShowInTaskbar = true;
             WindowState = FormWindowState.Normal;
+        }
+
+        private void generalCheckBoxAutoStartUp_CheckedChanged(object sender, EventArgs e)
+        {
+            TaskService ts = new TaskService();
+
+            if (generalCheckBoxAutoStartUp.Checked)
+            {
+                if (ts.FindTask("Hotspot", false) != null)
+                    return;
+                TaskDefinition td = ts.NewTask();
+                td.Triggers.Add(new LogonTrigger());
+                td.Actions.Add(new ExecAction(Application.ExecutablePath));
+                ts.RootFolder.RegisterTaskDefinition("Hotspot", td);
+            }
+            else
+            {
+                ts.RootFolder.DeleteTask("Hotspot", false);
+            }
         }
     }
 }

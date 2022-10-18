@@ -41,6 +41,7 @@
             this.networkCheckBoxAutoReconnect = new System.Windows.Forms.CheckBox();
             this.networkCheckBoxUndergraduate = new System.Windows.Forms.CheckBox();
             this.generalTabPage = new System.Windows.Forms.TabPage();
+            this.generalCheckBoxAutoStartUp = new System.Windows.Forms.CheckBox();
             this.generalCheckBoxMinimizeToTray = new System.Windows.Forms.CheckBox();
             this.generalCheckBoxTrayWhenStarted = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
@@ -134,6 +135,7 @@
             // 
             // generalTabPage
             // 
+            this.generalTabPage.Controls.Add(this.generalCheckBoxAutoStartUp);
             this.generalTabPage.Controls.Add(this.generalCheckBoxMinimizeToTray);
             this.generalTabPage.Controls.Add(this.generalCheckBoxTrayWhenStarted);
             this.generalTabPage.Name = "generalTabPage";
@@ -141,21 +143,31 @@
             this.generalTabPage.Text = "常规";
             this.generalTabPage.UseVisualStyleBackColor = true;
             // 
+            // generalCheckBoxAutoStartUp
+            // 
+            this.generalCheckBoxAutoStartUp.Location = new System.Drawing.Point(16, 16);
+            this.generalCheckBoxAutoStartUp.Name = "generalCheckBoxAutoStartUp";
+            this.generalCheckBoxAutoStartUp.Size = new System.Drawing.Size(240, 24);
+            this.generalCheckBoxAutoStartUp.TabIndex = 30;
+            this.generalCheckBoxAutoStartUp.Text = "开机自动启动";
+            this.generalCheckBoxAutoStartUp.UseVisualStyleBackColor = true;
+            this.generalCheckBoxAutoStartUp.CheckedChanged += new System.EventHandler(this.generalCheckBoxAutoStartUp_CheckedChanged);
+            // 
             // generalCheckBoxMinimizeToTray
             // 
-            this.generalCheckBoxMinimizeToTray.Location = new System.Drawing.Point(16, 16);
+            this.generalCheckBoxMinimizeToTray.Location = new System.Drawing.Point(16, 48);
             this.generalCheckBoxMinimizeToTray.Name = "generalCheckBoxMinimizeToTray";
             this.generalCheckBoxMinimizeToTray.Size = new System.Drawing.Size(240, 24);
-            this.generalCheckBoxMinimizeToTray.TabIndex = 30;
+            this.generalCheckBoxMinimizeToTray.TabIndex = 31;
             this.generalCheckBoxMinimizeToTray.Text = "最小化到托盘，而不是任务栏";
             this.generalCheckBoxMinimizeToTray.UseVisualStyleBackColor = true;
             // 
             // generalCheckBoxTrayWhenStarted
             // 
-            this.generalCheckBoxTrayWhenStarted.Location = new System.Drawing.Point(16, 48);
+            this.generalCheckBoxTrayWhenStarted.Location = new System.Drawing.Point(16, 80);
             this.generalCheckBoxTrayWhenStarted.Name = "generalCheckBoxTrayWhenStarted";
             this.generalCheckBoxTrayWhenStarted.Size = new System.Drawing.Size(240, 24);
-            this.generalCheckBoxTrayWhenStarted.TabIndex = 31;
+            this.generalCheckBoxTrayWhenStarted.TabIndex = 32;
             this.generalCheckBoxTrayWhenStarted.Text = "启动时最小化到托盘";
             this.generalCheckBoxTrayWhenStarted.UseVisualStyleBackColor = true;
             // 
@@ -192,6 +204,7 @@
         private CheckBox networkCheckBoxAutoReconnect;
         private CheckBox networkCheckBoxUndergraduate;
         private TabPage generalTabPage;
+        private CheckBox generalCheckBoxAutoStartUp;
         private CheckBox generalCheckBoxMinimizeToTray;
         private CheckBox generalCheckBoxTrayWhenStarted;
     }
