@@ -101,14 +101,8 @@ namespace HotspotManager
             timer1.Enabled = hotspotCheckBoxAutoReconnect.Checked;
         }
 
-        private int timer2_wait = 0;
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if(timer2_wait > 0)
-            {
-                timer2_wait -= timer2.Interval;
-                return;
-            }
             if (networkCheckBoxUndergraduate.Checked)
             {
                 switch (DateTime.Now.DayOfWeek)
@@ -124,24 +118,21 @@ namespace HotspotManager
                 }
             }
             var pingSender = new Ping();
-            PingReply reply1 = pingSender.Send("202.97.224.68", 1000);
-            if (!(reply1 != null && reply1.Status == IPStatus.Success))
+            var ping = (string ip) =>
             {
-                PingReply reply2 = pingSender.Send("202.38.193.65", 1000);
-                if (reply2 != null && reply2.Status == IPStatus.Success)
+                var reply = pingSender.Send(ip, 1000);
+                return reply != null && reply.Status == IPStatus.Success;
+            };
+            if (!ping("222.201.130.30") && !ping("222.201.130.33") && ping("202.38.193.65"))
+            {
+                if (Process.GetProcessesByName("DrMain").Length == 0)
                 {
-                    var ps = new List<Process>();
-                    ps.AddRange(Process.GetProcessesByName("DrMain"));
-                    ps.AddRange(Process.GetProcessesByName("DrClient"));
-                    ps.AddRange(Process.GetProcessesByName("DrUpdate"));
-                    foreach (var p in ps)
-                        p.Kill();
-                    foreach (var p in ps)
-                        p.WaitForExit(1000);
                     Process.Start("C:\\Drcom\\DrUpdateClient\\DrMain.exe");
-                    timer2_wait = 24000;
                 }
+                WindowUtility.ClickProcessButton("DrClient", "×¢Ïú");
+                WindowUtility.ClickProcessButton("DrClient", "µÇÂ¼");
             }
+            WindowUtility.ClickProcessButton("DrClient", "È·¶¨");
         }
 
         private void networkCheckBoxAutoReconnect_CheckedChanged(object sender, EventArgs e)
